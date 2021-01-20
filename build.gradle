@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group 'com.entiv'
+version '1.0'
+
+repositories {
+    // Paper
+    maven { url 'https://papermc.io/repo/repository/maven-public/' }
+
+    // NBT API
+    maven { url 'https://repo.codemc.org/repository/maven-public/' }
+
+    // ProtocolLib
+    maven { url "https://repo.dmulloy2.net/nexus/repository/public/" }
+    mavenCentral()
+}
+
+allprojects {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+dependencies {
+    compileOnly 'com.destroystokyo.paper:paper-api:1.16.4-R0.1-SNAPSHOT'
+    compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.5.0"
+    compile 'de.tr7zw:item-nbt-api-plugin:2.6.0'
+}
+
+[compileJava,compileTestJava]*.options*.encoding = 'UTF-8'
+
+// 插件导出目录
+libsDirName = 'C:\\Users\\EnTIv\\Desktop\\minecraft\\server\\paper-1.16.4\\plugins'
+

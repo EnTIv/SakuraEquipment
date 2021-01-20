@@ -1,0 +1,9 @@
+name: SakuraEquipment
+main: com.entiv.sakuraequipment.Main
+version: 1.0
+author: EnTIv
+api-version: 1.16
+commands:
+  SakuraEquipment: #指令名
+    description: "测试指令" #指令的注解
+    usage: /si give #指令的用法 当onCommand()方法返回false时提示这里的内容
