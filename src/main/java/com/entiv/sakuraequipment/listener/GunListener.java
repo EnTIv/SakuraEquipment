@@ -1,9 +1,8 @@
 package com.entiv.sakuraequipment.listener;
 
-import com.entiv.sakuraequipment.Main;
 import com.entiv.sakuraequipment.event.GunShootEvent;
 import com.entiv.sakuraequipment.gun.Bullet;
-import com.entiv.sakuraequipment.library.utils.Performance;
+import com.entiv.sakuraequipment.utils.Performance;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 

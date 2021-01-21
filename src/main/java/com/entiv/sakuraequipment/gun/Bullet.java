@@ -40,16 +40,13 @@ public class Bullet extends BukkitRunnable {
         world.spawnParticle(Particle.BUBBLE_POP, location, 1, 0, 0, 0, 0.01);
 
         if (collisionBlock()) return;
-        if (collisionEntity()) return;
+        collisionEntity();
 
-        System.out.println(1);
-        location.getNearbyEntities(0.5, 0.5, 0.5);
     }
 
     private boolean collisionBlock() {
 
         Block block = world.getBlockAt(location);
-        System.out.println((block.isPassable()));
         if (block.isPassable()) return false;
 
         BlockData blockData = world.getBlockAt(location).getBlockData();
@@ -59,11 +56,11 @@ public class Bullet extends BukkitRunnable {
         return true;
     }
 
-    private boolean collisionEntity() {
+    private void collisionEntity() {
 
         Collection<LivingEntity> nearbyEntities = location.getNearbyLivingEntities(0.5, 0.5, 0.5, entity -> !entity.equals(shooter));
 
-        if (nearbyEntities.isEmpty()) return false;
+        if (nearbyEntities.isEmpty()) return;
 
         for (LivingEntity nearbyEntity : nearbyEntities) {
             Particle.DustOptions dustOptions = new Particle.DustOptions(Color.fromRGB(255, 0, 0), 3);
@@ -73,6 +70,5 @@ public class Bullet extends BukkitRunnable {
         }
 
         cancel();
-        return true;
     }
 }

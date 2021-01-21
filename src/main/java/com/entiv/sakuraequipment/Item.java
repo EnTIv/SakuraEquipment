@@ -1,6 +1,6 @@
 package com.entiv.sakuraequipment;
 
-import com.entiv.sakuraequipment.library.utils.ItemBuilder;
+import com.entiv.sakuraequipment.utils.ItemBuilder;
 import de.tr7zw.nbtapi.NBTCompound;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.Material;

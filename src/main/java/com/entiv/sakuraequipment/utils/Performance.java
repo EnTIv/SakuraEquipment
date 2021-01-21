@@ -1,4 +1,4 @@
-package com.entiv.sakuraequipment.library.utils;
+package com.entiv.sakuraequipment.utils;
 
 public abstract class Performance {
 

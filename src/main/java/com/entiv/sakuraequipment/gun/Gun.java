@@ -1,14 +1,12 @@
 package com.entiv.sakuraequipment.gun;
 
 import com.entiv.sakuraequipment.Item;
-import com.entiv.sakuraequipment.Main;
 import com.entiv.sakuraequipment.event.GunShootEvent;
-import com.entiv.sakuraequipment.library.utils.ItemBuilder;
-import com.entiv.sakuraequipment.library.utils.Message;
+import com.entiv.sakuraequipment.utils.ItemBuilder;
+import com.entiv.sakuraequipment.utils.Message;
 import de.tr7zw.nbtapi.NBTCompound;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;

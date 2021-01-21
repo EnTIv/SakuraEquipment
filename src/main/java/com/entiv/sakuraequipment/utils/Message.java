@@ -1,4 +1,4 @@
-package com.entiv.sakuraequipment.library.utils;
+package com.entiv.sakuraequipment.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
