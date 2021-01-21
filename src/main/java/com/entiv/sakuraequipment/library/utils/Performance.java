@@ -14,5 +14,5 @@ public abstract class Performance {
         System.out.println("运行耗时: " + time + " ms");
     }
 
-    public abstract void run() throws IllegalAccessException, InstantiationException;
+    public abstract void run();
 }

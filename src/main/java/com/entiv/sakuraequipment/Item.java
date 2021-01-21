@@ -15,7 +15,7 @@ public abstract class Item {
     public final Material material;
     public final int version;
 
-    public final String name;
+    public final String name = getClass().getSimpleName();
     public final String type;
     public final String uuid;
     public final String describe;
@@ -25,7 +25,6 @@ public abstract class Item {
         material = builder.material;
         version = builder.version;
 
-        name = builder.name;
         type = builder.type;
         uuid = builder.uuid;
         describe = builder.describe;
@@ -33,6 +32,7 @@ public abstract class Item {
 
     // 设置物品所需的 NBT
     protected abstract void setNBTCompound(NBTCompound compound);
+
     public ItemStack getItemStack() {
         List<String> lore = new ArrayList<>();
         ItemStack itemStack = new ItemBuilder(material).name("&d&l" + name).lore(lore).addLore(describe).build();
@@ -42,6 +42,7 @@ public abstract class Item {
         NBTCompound compound = nbtItem.getCompound("SakuraEquipment");
 
         compound.setString("Name", name);
+        compound.setString("Type", type);
         compound.setString("UUID", uuid);
         compound.setInteger("Version", version);
 
@@ -82,11 +83,13 @@ public abstract class Item {
         private int version = 1;
         private Material material = Material.STONE;
 
-        private String name = getClass().getSimpleName();
-        private String type = "Item";
-
         private String uuid = UUID.randomUUID().toString();
         private String describe;
+        private String type;
+
+        protected Builder(String type) {
+            this.type = type;
+        }
 
         public T version(int val) {
             version = val;
@@ -108,7 +111,6 @@ public abstract class Item {
             NBTItem nbtItem = new NBTItem(itemStack);
             NBTCompound compound = nbtItem.getCompound("SakuraEquipment");
 
-            name = compound.getString("Name");
             type = compound.getString("Type");
             uuid = compound.getString("UUID");
             version = compound.getInteger("Version");

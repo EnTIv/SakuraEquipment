@@ -38,8 +38,6 @@ public class Main extends JavaPlugin {
         Message.sendConsole(message);
 
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
-
-        PluginCommand command = Bukkit.getPluginCommand("SakuraEquipment");
     }
 
     @Override

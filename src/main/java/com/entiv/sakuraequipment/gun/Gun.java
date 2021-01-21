@@ -2,6 +2,7 @@ package com.entiv.sakuraequipment.gun;
 
 import com.entiv.sakuraequipment.Item;
 import com.entiv.sakuraequipment.library.utils.ItemBuilder;
+import com.entiv.sakuraequipment.library.utils.Message;
 import de.tr7zw.nbtapi.NBTCompound;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.inventory.ItemStack;
@@ -35,6 +36,7 @@ public abstract class Gun extends Item {
         range = builder.range;
         criticalRate = builder.criticalRate;
         criticalMultiply = builder.criticalMultiply;
+
     }
 
     public abstract void onShoot();
@@ -47,7 +49,7 @@ public abstract class Gun extends Item {
         lore.add("");
 
         lore.add("&6攻击力: &e&l" + damage);
-        lore.add("&6暴击率: &e&l" + criticalRate + "%");
+        lore.add("&6暴击率: &e&l" + Message.formatNumber(criticalRate) + "%");
         lore.add("&6载弹量: &e&l" + bulletAmount);
 
         lore.add("&6射程: &e&l" + range);
@@ -76,7 +78,7 @@ public abstract class Gun extends Item {
 
     }
 
-    protected static abstract class Builder<T extends Item.Builder<T>> extends Item.Builder<T> {
+    public static abstract class Builder<T extends Item.Builder<T>> extends Item.Builder<T> {
 
         private int damage = 15;
         private int bulletAmount = 30;
@@ -88,6 +90,10 @@ public abstract class Gun extends Item {
         private double range = 5;
         private double criticalRate = 0;
         private double criticalMultiply = 2.0;
+
+        protected Builder() {
+            super("Gun");
+        }
 
         public T damage(int val) {
             damage = val;

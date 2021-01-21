@@ -1,10 +1,9 @@
 package com.entiv.sakuraequipment.listener;
 
 
+import com.entiv.sakuraequipment.ItemFactory;
 import com.entiv.sakuraequipment.ItemManager;
 import com.entiv.sakuraequipment.gun.Gun;
-import com.entiv.sakuraequipment.gun.吸血鬼节杖;
-import com.entiv.sakuraequipment.library.utils.Performance;
 import de.tr7zw.nbtapi.NBTCompound;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.Bukkit;
@@ -35,9 +34,12 @@ public class PlayerListener implements Listener {
             String name = compound.getString("Name");
             String type = compound.getString("Type");
 
+            if (!type.equals("Gun")) return;
 
-            Gun testGun = new 吸血鬼节杖.Builder().buildFromItemStack(itemStack);
-            System.out.println(testGun.damage);
+            Gun.Builder<?> builder = ItemFactory.getInstance().gunCreate(name);
+            Gun gun = builder.buildFromItemStack(itemStack);
+            System.out.println(gun.name);
+            System.out.println(gun.damage);
         }
     }
 

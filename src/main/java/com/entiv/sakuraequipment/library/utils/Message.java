@@ -75,7 +75,7 @@ public class Message {
         return strings;
     }
 
-    public static String formatMoney(Number number) {
+    public static String formatNumber(Number number) {
         DecimalFormat format = new DecimalFormat(",###.##");
         return format.format(number);
     }
