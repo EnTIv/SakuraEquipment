@@ -7,6 +7,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.entiv.sakuraequipment.gun.Gun;
 import com.entiv.sakuraequipment.gun.吸血鬼节杖;
 import com.entiv.sakuraequipment.library.utils.Message;
+import com.entiv.sakuraequipment.listener.GunListener;
 import com.entiv.sakuraequipment.listener.PlayerListener;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -38,6 +39,7 @@ public class Main extends JavaPlugin {
         Message.sendConsole(message);
 
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+        getServer().getPluginManager().registerEvents(new GunListener(), this);
     }
 
     @Override

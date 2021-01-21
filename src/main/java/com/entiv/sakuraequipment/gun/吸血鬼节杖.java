@@ -23,7 +23,6 @@ public class 吸血鬼节杖 extends Gun {
         double criticalRate = randomInt(10, 20);
         double criticalMultiply = randomDouble(1.8, 2.2, 1);
 
-
         return new Builder()
                 .material(Material.LEATHER_HORSE_ARMOR)
                 .version(1)
@@ -43,6 +42,16 @@ public class 吸血鬼节杖 extends Gun {
 
     @Override
     public void onShoot() {
+
+    }
+
+    @Override
+    public void onBulletFlyTick() {
+
+    }
+
+    @Override
+    public void onHit() {
 
     }
 

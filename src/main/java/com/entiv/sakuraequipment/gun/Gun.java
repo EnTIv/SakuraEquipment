@@ -1,19 +1,24 @@
 package com.entiv.sakuraequipment.gun;
 
 import com.entiv.sakuraequipment.Item;
+import com.entiv.sakuraequipment.Main;
+import com.entiv.sakuraequipment.event.GunShootEvent;
 import com.entiv.sakuraequipment.library.utils.ItemBuilder;
 import com.entiv.sakuraequipment.library.utils.Message;
 import de.tr7zw.nbtapi.NBTCompound;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
+//TODO 逻辑: 玩家右键 -> 枪开枪(生成对应子弹) -> 触发开枪事件(处理 itemstack) -> 飞行
 public abstract class Gun extends Item {
 
     public final int damage;
-    public final int bulletAmount;
+    public final int magazineSize;
 
     public final double bulletSpeed;
     public final double attackSpeed;
@@ -23,11 +28,13 @@ public abstract class Gun extends Item {
     public final double criticalRate;
     public final double criticalMultiply;
 
+    public Consumer<GunShootEvent> shootEvent;
+
     protected Gun(Builder<?> builder) {
         super(builder);
 
         damage = builder.damage;
-        bulletAmount = builder.bulletAmount;
+        magazineSize = builder.magazineSize;
 
         bulletSpeed = builder.bulletSpeed;
         attackSpeed = builder.attackSpeed;
@@ -39,7 +46,13 @@ public abstract class Gun extends Item {
 
     }
 
-    public abstract void onShoot();
+    public void onShoot() {
+
+    }
+
+    public abstract void onBulletFlyTick();
+
+    public abstract void onHit();
 
     @Override
     public ItemStack getItemStack() {
@@ -50,7 +63,7 @@ public abstract class Gun extends Item {
 
         lore.add("&6攻击力: &e&l" + damage);
         lore.add("&6暴击率: &e&l" + Message.formatNumber(criticalRate) + "%");
-        lore.add("&6载弹量: &e&l" + bulletAmount);
+        lore.add("&6载弹量: &e&l" + magazineSize);
 
         lore.add("&6射程: &e&l" + range);
         lore.add("&6弹速: &e&l" + bulletSpeed);
@@ -66,7 +79,8 @@ public abstract class Gun extends Item {
     protected void setNBTCompound(NBTCompound compound) {
 
         compound.setInteger("Damage", damage);
-        compound.setInteger("BulletAmount", bulletAmount);
+        compound.setInteger("MagazineSize", magazineSize);
+        compound.setInteger("BulletAmount", magazineSize);
 
         compound.setDouble("BulletSpeed", bulletSpeed);
         compound.setDouble("AttackSpeed", attackSpeed);
@@ -81,7 +95,7 @@ public abstract class Gun extends Item {
     public static abstract class Builder<T extends Item.Builder<T>> extends Item.Builder<T> {
 
         private int damage = 15;
-        private int bulletAmount = 30;
+        private int magazineSize = 30;
 
         private double bulletSpeed = 3;
         private double attackSpeed = 1;
@@ -101,7 +115,7 @@ public abstract class Gun extends Item {
         }
 
         public T bulletAmount(int val) {
-            bulletAmount = val;
+            magazineSize = val;
             return self();
         }
 
@@ -144,7 +158,7 @@ public abstract class Gun extends Item {
             NBTCompound compound = nbtItem.getCompound("SakuraEquipment");
 
             damage = compound.getInteger("Damage");
-            bulletAmount = compound.getInteger("BulletAmount");
+            magazineSize = compound.getInteger("MagazineSize");
 
             bulletSpeed = compound.getDouble("BulletSpeed");
             attackSpeed = compound.getDouble("AttackSpeed");

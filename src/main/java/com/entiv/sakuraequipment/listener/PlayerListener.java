@@ -3,10 +3,12 @@ package com.entiv.sakuraequipment.listener;
 
 import com.entiv.sakuraequipment.ItemFactory;
 import com.entiv.sakuraequipment.ItemManager;
+import com.entiv.sakuraequipment.event.GunShootEvent;
 import com.entiv.sakuraequipment.gun.Gun;
 import de.tr7zw.nbtapi.NBTCompound;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -38,20 +40,9 @@ public class PlayerListener implements Listener {
 
             Gun.Builder<?> builder = ItemFactory.getInstance().gunCreate(name);
             Gun gun = builder.buildFromItemStack(itemStack);
-            System.out.println(gun.name);
-            System.out.println(gun.damage);
+
+            GunShootEvent gunShootEvent = new GunShootEvent(itemStack, gun, player);
+            Bukkit.getServer().getPluginManager().callEvent(gunShootEvent);
         }
     }
-
-    @EventHandler
-    public void onRocketHit(ProjectileHitEvent event) {
-
-        Projectile projectile = event.getEntity();
-        Damageable hitEntity = (Damageable) event.getHitEntity();
-
-        if (hitEntity == null) return;
-        hitEntity.damage(10, Bukkit.getPlayer("EnTIv"));
-//        projectile.getWorld().createExplosion(projectile.getLocation(), 5, false, false);
-    }
-
 }
