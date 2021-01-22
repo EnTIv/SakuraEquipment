@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 //TODO 逻辑: 玩家右键 -> 枪开枪(生成对应子弹) -> 触发开枪事件(处理 itemstack) -> 飞行
+// 枪械类里面有个生成子弹的方法，每个附魔都会调用这个方法来设置子弹属性
 public abstract class Gun extends Item {
 
     public final int damage;
