@@ -28,7 +28,7 @@ public class randomGun extends Gun {
         int bulletAmount = randomInt(1, 30);
 
         double criticalRate = randomInt(1, 100);
-        double criticalMultiply = randomDouble(1.0, 1.8, 2);
+        double criticalMultiply = randomDouble(1.0, 2.0, 2);
 
         return new Builder()
                 .material(Material.LEATHER_HORSE_ARMOR)
@@ -45,6 +45,12 @@ public class randomGun extends Gun {
                 .criticalRate(criticalRate)
                 .criticalMultiply(criticalMultiply)
                 .build();
+    }
+
+    @Override
+    public Bullet getBullet() {
+
+        return new Bullet(damage, bulletSpeed, range, criticalRate, criticalMultiply);
     }
 
     @Override

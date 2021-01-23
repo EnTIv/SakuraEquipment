@@ -15,7 +15,7 @@ public class Bullet {
     public final double criticalMultiply;
 
     public boolean isCritical = false;
-    public final double realDamage;
+    public double realDamage;
 
     public Bullet(double damage,double speed,double flyTime, double criticalRate, double criticalMultiply) {
         this.damage = damage;
@@ -34,6 +34,7 @@ public class Bullet {
             realDamage = damage;
         }
 
+        realDamage = realDamage * 0.9;
     }
 
 }
