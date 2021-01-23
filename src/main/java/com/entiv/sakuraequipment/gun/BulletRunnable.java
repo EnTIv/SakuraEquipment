@@ -1,6 +1,7 @@
 package com.entiv.sakuraequipment.gun;
 
 import com.entiv.sakuraequipment.Main;
+import com.entiv.sakuraequipment.utils.Message;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -24,6 +25,7 @@ public class BulletRunnable extends BukkitRunnable {
 
     double damage;
     double flyTime;
+    boolean isCritical;
 
     public BulletRunnable(Player shooter, Bullet bullet) {
 
@@ -32,9 +34,10 @@ public class BulletRunnable extends BukkitRunnable {
 
         world = location.getWorld();
         vector = location.getDirection().multiply(0.05 * bullet.speed);
-        damage = bullet.damage;
+        damage = bullet.realDamage;
 
         flyTime = bullet.flyTime * 20;
+        isCritical = bullet.isCritical;
     }
 
     @Override
@@ -80,7 +83,9 @@ public class BulletRunnable extends BukkitRunnable {
             world.spawnParticle(Particle.REDSTONE, location, 5, 0.2, 0.2, 0.2, 0.00001, dustOptions);
 
             nearbyEntity.damage(damage, shooter);
-
+            if (isCritical) {
+                Message.sendActionBar(shooter,"&4&l暴击!");
+            }
             break;
         }
         return true;

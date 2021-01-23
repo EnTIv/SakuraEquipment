@@ -26,9 +26,7 @@ public class GunListener implements Listener {
         ItemStack itemStack = event.getItemStack();
         Integer bulletAmount = getBulletAmount(itemStack);
 
-        if (player.hasCooldown(itemStack.getType())) {
-            return;
-        }
+        if (player.hasCooldown(itemStack.getType())) return;
 
         consumeBullet(player, itemStack, gun.magazineSize);
         BulletRunnable runnable = new BulletRunnable(player, gun.getBullet());
