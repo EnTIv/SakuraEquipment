@@ -53,7 +53,7 @@ public class BulletRunnable extends BukkitRunnable {
 
         flyTime--;
 
-        if (flyTime == 0) cancel();
+        if (flyTime <= 0) cancel();
 
     }
 
