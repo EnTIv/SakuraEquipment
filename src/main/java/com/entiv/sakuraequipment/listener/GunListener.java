@@ -29,11 +29,12 @@ public class GunListener implements Listener {
         if (player.hasCooldown(itemStack.getType())) return;
 
         consumeBullet(player, itemStack, gun.magazineSize);
+
         BulletRunnable runnable = new BulletRunnable(player, gun.getBullet());
         runnable.runTaskTimer(Main.getInstance(), 0, 1);
         player.setCooldown(itemStack.getType(), gun.attackSpeed);
 
-        if (bulletAmount <= 0) {
+        if (bulletAmount <= 1) {
             reload(player, itemStack, gun);
         }
     }
@@ -61,7 +62,7 @@ public class GunListener implements Listener {
     }
 
     private void reload(Player player, ItemStack itemStack, Gun gun) {
-        Message.sendActionBar(player, "&c&l" + "换弹中...");
+        Message.sendActionBar(player, "&c&l换弹中...");
 
         ItemMeta itemMeta = itemStack.getItemMeta();
         PersistentDataContainer container = itemMeta.getPersistentDataContainer();

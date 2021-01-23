@@ -4,7 +4,7 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.PacketContainer;
-import com.entiv.sakuraequipment.gun.吸血鬼节杖;
+import com.entiv.sakuraequipment.gun.randomGun;
 import com.entiv.sakuraequipment.utils.Message;
 import com.entiv.sakuraequipment.listener.GunListener;
 import com.entiv.sakuraequipment.listener.PlayerListener;
@@ -43,12 +43,17 @@ public class Main extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (sender.isOp() && sender instanceof Player) {
-            吸血鬼节杖 testGun = 吸血鬼节杖.getInstance();
+        if (!sender.isOp()) return true;
 
-            Player player = (Player) sender;
+        if (args.length == 2) {
+            Player player = Bukkit.getPlayer(args[1]);
+
+            if (player == null) return true;
+
+            randomGun testGun = randomGun.getInstance();
             player.getInventory().addItem(testGun.getItemStack());
         }
+
         return true;
     }
 
