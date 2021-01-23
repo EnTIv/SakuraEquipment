@@ -1,75 +1,43 @@
 package com.entiv.sakuraequipment.gun;
 
-import com.entiv.sakuraequipment.Main;
-import org.bukkit.Color;
-import org.bukkit.Location;
-import org.bukkit.Particle;
-import org.bukkit.World;
-import org.bukkit.block.Block;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
+import com.entiv.sakuraequipment.utils.ItemBuilder;
+import com.entiv.sakuraequipment.utils.Message;
 
-import java.util.Collection;
+public class Bullet {
 
-// 子弹不用枪械内部类的原因：10种子弹 100 种枪械用的话，不好实现
-public class Bullet extends BukkitRunnable {
+    private double speed = 3;
+    private double damage = 1;
+    private double flyTime = 10;
 
-    Location location;
-    Vector vector;
-    World world;
-    Player shooter;
+    public Bullet() {
 
-    public Bullet(Player shooter) {
-
-        this.shooter = shooter;
-        location = shooter.getEyeLocation();
-
-        world = location.getWorld();
-        vector = location.getDirection().multiply(0.3);
-
-        runTaskTimer(Main.getInstance(), 0, 1);
     }
 
-    @Override
-    public void run() {
-
-        location.add(vector);
-        world.spawnParticle(Particle.BUBBLE_POP, location, 1, 0, 0, 0, 0.01);
-
-        if (checkBlockCollision() || checkEntityCollision()) {
-            cancel();
-        }
+    public Bullet speed(double speed) {
+        this.speed = speed;
+        return this;
     }
 
-    private boolean checkBlockCollision() {
-
-        Block block = world.getBlockAt(location);
-        if (block.isPassable()) return false;
-
-        BlockData blockData = world.getBlockAt(location).getBlockData();
-        world.spawnParticle(Particle.BLOCK_CRACK, location, 7, 0.5, 0.5, 0.5, 0.0001, blockData);
-
-        return true;
+    public Bullet damage(double damage) {
+        this.damage = damage;
+        return this;
     }
 
-    private boolean checkEntityCollision() {
-
-        Collection<LivingEntity> nearbyEntities = location.getNearbyLivingEntities(0.5, 0.5, 0.5, entity -> !entity.equals(shooter));
-
-        if (nearbyEntities.isEmpty()) return false;
-
-        for (LivingEntity nearbyEntity : nearbyEntities) {
-            Particle.DustOptions dustOptions = new Particle.DustOptions(Color.fromRGB(255, 0, 0), 3);
-            world.spawnParticle(Particle.REDSTONE, location, 5, 0.2, 0.2, 0.2, 0.00001, dustOptions);
-
-            nearbyEntity.damage(1, shooter);
-
-            break;
-        }
-
-        return true;
+    public Bullet flyTime(double flyTime) {
+        this.flyTime = flyTime;
+        return this;
     }
+
+    public double getDamage() {
+        return damage;
+    }
+
+    public double getFlyTime() {
+        return flyTime;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
 }

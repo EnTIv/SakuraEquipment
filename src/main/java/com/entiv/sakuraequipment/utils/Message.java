@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Player;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -36,6 +37,11 @@ public class Message {
 
         ConsoleCommandSender consoleSender = Bukkit.getConsoleSender();
         consoleSender.sendMessage(toColor(message));
+    }
+
+    public static void sendActionBar(Player player, String message) {
+        if (message == null || message.isEmpty()) return;
+        player.sendActionBar(toColor(message));
     }
 
     public static void sendConsole(String[] message) {

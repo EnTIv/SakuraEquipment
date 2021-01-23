@@ -11,17 +11,17 @@ public class 吸血鬼节杖 extends Gun {
 
     public static 吸血鬼节杖 getInstance() {
 
-        int damage = randomInt(10, 15);
-        double range = randomDouble(5, 7, 1);
+        int damage = randomInt(1, 20);
+        double range = randomDouble(1, 10, 1);
 
-        double attackSpeed = randomDouble(1.0, 1.3, 1);
-        double bulletSpeed = randomDouble(1.0, 3.0, 1);
-        double reloadSpeed = randomDouble(2.5, 3.5, 1);
+        int attackSpeed = randomInt(1, 40);
+        double bulletSpeed = randomDouble(1.0, 40, 1);
+        int reloadSpeed = randomInt(10,60);
 
-        int bulletAmount = randomInt(30, 35);
+        int bulletAmount = randomInt(1, 35);
 
-        double criticalRate = randomInt(10, 20);
-        double criticalMultiply = randomDouble(1.8, 2.2, 1);
+        double criticalRate = randomInt(1, 100);
+        double criticalMultiply = randomDouble(1.5, 2.5, 1);
 
         return new Builder()
                 .material(Material.LEATHER_HORSE_ARMOR)

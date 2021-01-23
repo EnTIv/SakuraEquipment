@@ -1,10 +1,14 @@
 package com.entiv.sakuraequipment.utils;
 
+import com.entiv.sakuraequipment.Main;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -100,6 +104,18 @@ public class ItemBuilder {
     public ItemBuilder setUnbreakable() {
 
         itemMeta.setUnbreakable(true);
+
+        itemStack.setItemMeta(itemMeta);
+
+        return this;
+    }
+
+    public ItemBuilder persistentDataContainer(String namespacedKey, Integer integer) {
+
+        PersistentDataContainer container = itemMeta.getPersistentDataContainer();
+
+        NamespacedKey bulletAmount = new NamespacedKey(Main.getInstance(), namespacedKey);
+        container.set(bulletAmount, PersistentDataType.INTEGER, integer);
 
         itemStack.setItemMeta(itemMeta);
 

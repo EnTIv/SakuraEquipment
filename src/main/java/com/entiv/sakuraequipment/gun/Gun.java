@@ -19,9 +19,9 @@ public abstract class Gun extends Item {
     public final int damage;
     public final int magazineSize;
 
+    public final int attackSpeed;
+    public final int reloadSpeed;
     public final double bulletSpeed;
-    public final double attackSpeed;
-    public final double reloadSpeed;
 
     public final double range;
     public final double criticalRate;
@@ -43,6 +43,10 @@ public abstract class Gun extends Item {
         criticalRate = builder.criticalRate;
         criticalMultiply = builder.criticalMultiply;
 
+    }
+
+    public Bullet getBullet() {
+        return new Bullet().damage(damage).speed(bulletSpeed).flyTime(range);
     }
 
     public void onShoot() {
@@ -67,11 +71,11 @@ public abstract class Gun extends Item {
         lore.add("&6射程: &e&l" + range);
         lore.add("&6弹速: &e&l" + bulletSpeed);
 
-        lore.add("&6攻击速度: &e&l" + attackSpeed);
-        lore.add("&6换弹速度: &e&l" + reloadSpeed);
+        lore.add("&6攻击速度: &e&l" + Message.formatNumber(20.0 / attackSpeed));
+        lore.add("&6换弹速度: &e&l" + Message.formatNumber(20.0 / reloadSpeed));
         lore.add("&6暴击倍率: &e&l" + criticalMultiply + "x");
 
-        return new ItemBuilder(itemStack).lore(lore).build();
+        return new ItemBuilder(itemStack).lore(lore).persistentDataContainer("BulletAmount", magazineSize).build();
     }
 
     @Override
@@ -79,11 +83,10 @@ public abstract class Gun extends Item {
 
         compound.setInteger("Damage", damage);
         compound.setInteger("MagazineSize", magazineSize);
-        compound.setInteger("BulletAmount", magazineSize);
 
         compound.setDouble("BulletSpeed", bulletSpeed);
-        compound.setDouble("AttackSpeed", attackSpeed);
-        compound.setDouble("ReloadSpeed", reloadSpeed);
+        compound.setInteger("AttackSpeed", attackSpeed);
+        compound.setInteger("ReloadSpeed", reloadSpeed);
 
         compound.setDouble("Range", range);
         compound.setDouble("CriticalRate", criticalRate);
@@ -97,8 +100,8 @@ public abstract class Gun extends Item {
         private int magazineSize = 30;
 
         private double bulletSpeed = 3;
-        private double attackSpeed = 1;
-        private double reloadSpeed = 3;
+        private int attackSpeed = 20;
+        private int reloadSpeed = 3;
 
         private double range = 5;
         private double criticalRate = 0;
@@ -123,12 +126,12 @@ public abstract class Gun extends Item {
             return self();
         }
 
-        public T attackSpeed(double val) {
+        public T attackSpeed(int val) {
             attackSpeed = val;
             return self();
         }
 
-        public T reloadSpeed(double val) {
+        public T reloadSpeed(int val) {
             reloadSpeed = val;
             return self();
         }
@@ -157,11 +160,11 @@ public abstract class Gun extends Item {
             NBTCompound compound = nbtItem.getCompound("SakuraEquipment");
 
             damage = compound.getInteger("Damage");
+            attackSpeed = compound.getInteger("AttackSpeed");
             magazineSize = compound.getInteger("MagazineSize");
 
             bulletSpeed = compound.getDouble("BulletSpeed");
-            attackSpeed = compound.getDouble("AttackSpeed");
-            reloadSpeed = compound.getDouble("ReloadSpeed");
+            reloadSpeed = compound.getInteger("ReloadSpeed");
 
             range = compound.getDouble("Range");
             criticalRate = compound.getDouble("CriticalRate");
