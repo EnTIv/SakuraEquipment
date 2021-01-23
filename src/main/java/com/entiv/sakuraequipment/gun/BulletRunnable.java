@@ -31,10 +31,10 @@ public class BulletRunnable extends BukkitRunnable {
         location = shooter.getEyeLocation();
 
         world = location.getWorld();
-        vector = location.getDirection().multiply(0.05 * bullet.getSpeed());
-        damage = bullet.getDamage();
+        vector = location.getDirection().multiply(0.05 * bullet.speed);
+        damage = bullet.damage;
 
-        flyTime = bullet.getFlyTime() * 20;
+        flyTime = bullet.flyTime * 20;
     }
 
     @Override

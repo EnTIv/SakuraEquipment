@@ -12,9 +12,9 @@ public class 吸血鬼节杖 extends Gun {
     public static 吸血鬼节杖 getInstance() {
 
         int damage = randomInt(1, 20);
-        double range = randomDouble(1, 10, 1);
+        double range = randomDouble(1.0, 5.0, 1);
 
-        int attackSpeed = randomInt(1, 40);
+        int attackSpeed = randomInt(1, 20);
         double bulletSpeed = randomDouble(1.0, 40, 1);
         int reloadSpeed = randomInt(10,60);
 

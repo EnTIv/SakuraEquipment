@@ -3,41 +3,37 @@ package com.entiv.sakuraequipment.gun;
 import com.entiv.sakuraequipment.utils.ItemBuilder;
 import com.entiv.sakuraequipment.utils.Message;
 
+import java.util.Random;
+
 public class Bullet {
 
-    private double speed = 3;
-    private double damage = 1;
-    private double flyTime = 10;
+    public final double speed;
+    public final double damage;
+    public final double flyTime;
 
-    public Bullet() {
+    public final double criticalRate;
+    public final double criticalMultiply;
 
-    }
+    public boolean isCritical = false;
+    public final double realDamage;
 
-    public Bullet speed(double speed) {
-        this.speed = speed;
-        return this;
-    }
-
-    public Bullet damage(double damage) {
+    public Bullet(double damage,double speed,double flyTime, double criticalRate, double criticalMultiply) {
         this.damage = damage;
-        return this;
-    }
-
-    public Bullet flyTime(double flyTime) {
+        this.speed = speed;
         this.flyTime = flyTime;
-        return this;
-    }
 
-    public double getDamage() {
-        return damage;
-    }
+        this.criticalRate = criticalRate;
+        this.criticalMultiply = criticalMultiply;
 
-    public double getFlyTime() {
-        return flyTime;
-    }
+        int i = new Random().nextInt(100);
 
-    public double getSpeed() {
-        return speed;
+        if (i < criticalRate) {
+            realDamage = damage * criticalMultiply;
+            isCritical = true;
+        } else {
+            realDamage = damage;
+        }
+
     }
 
 }

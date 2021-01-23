@@ -46,7 +46,7 @@ public abstract class Gun extends Item {
     }
 
     public Bullet getBullet() {
-        return new Bullet().damage(damage).speed(bulletSpeed).flyTime(range);
+        return new Bullet(damage, bulletSpeed, range, criticalRate, criticalMultiply);
     }
 
     public void onShoot() {

@@ -43,10 +43,12 @@ public class Main extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        Player player = Bukkit.getPlayer("EnTIv");
-        吸血鬼节杖 testGun = 吸血鬼节杖.getInstance();
+        if (sender.isOp() && sender instanceof Player) {
+            吸血鬼节杖 testGun = 吸血鬼节杖.getInstance();
 
-        player.getInventory().addItem(testGun.getItemStack());
+            Player player = (Player) sender;
+            player.getInventory().addItem(testGun.getItemStack());
+        }
         return true;
     }
 
