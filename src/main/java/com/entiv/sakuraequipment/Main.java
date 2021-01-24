@@ -4,7 +4,7 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.PacketContainer;
-import com.entiv.sakuraequipment.gun.randomGun;
+import com.entiv.sakuraequipment.gun.RandomGun;
 import com.entiv.sakuraequipment.utils.Message;
 import com.entiv.sakuraequipment.listener.GunListener;
 import com.entiv.sakuraequipment.listener.PlayerListener;
@@ -50,7 +50,7 @@ public class Main extends JavaPlugin {
 
             if (player == null) return true;
 
-            randomGun testGun = randomGun.getInstance();
+            RandomGun testGun = RandomGun.getInstance();
             player.getInventory().addItem(testGun.getItemStack());
         }
 

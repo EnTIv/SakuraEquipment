@@ -33,7 +33,7 @@ public class ItemFactory {
                     .computeIfAbsent(name, k -> ItemFactory.load("gun", name))
                     .newInstance();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            throw new NullPointerException(name);
+            throw new NullPointerException("找不到枪械" + name);
         }
     }
 
