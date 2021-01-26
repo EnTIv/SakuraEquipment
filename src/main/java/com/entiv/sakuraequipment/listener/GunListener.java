@@ -2,7 +2,7 @@ package com.entiv.sakuraequipment.listener;
 
 import com.entiv.sakuraequipment.Main;
 import com.entiv.sakuraequipment.event.GunShootEvent;
-import com.entiv.sakuraequipment.gun.BulletRunnable;
+import com.entiv.sakuraequipment.bullet.BulletRunnable;
 import com.entiv.sakuraequipment.gun.Gun;
 import com.entiv.sakuraequipment.utils.Message;
 import org.bukkit.NamespacedKey;

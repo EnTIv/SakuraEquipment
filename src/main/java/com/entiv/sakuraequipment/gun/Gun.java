@@ -1,6 +1,8 @@
 package com.entiv.sakuraequipment.gun;
 
 import com.entiv.sakuraequipment.Item;
+import com.entiv.sakuraequipment.bullet.Bullet;
+import com.entiv.sakuraequipment.event.GunDamageEvent;
 import com.entiv.sakuraequipment.event.GunShootEvent;
 import com.entiv.sakuraequipment.utils.ItemBuilder;
 import com.entiv.sakuraequipment.utils.Message;
@@ -27,7 +29,7 @@ public abstract class Gun extends Item {
     public final double criticalRate;
     public final double criticalMultiply;
 
-    public Consumer<GunShootEvent> shootEvent;
+    public Consumer<GunDamageEvent> damageEvent;
 
     protected Gun(Builder<?> builder) {
         super(builder);
@@ -49,13 +51,13 @@ public abstract class Gun extends Item {
         return new Bullet(damage, bulletSpeed, range, criticalRate, criticalMultiply);
     }
 
-    public void onShoot() {
+    public void onBulletFlyTick() {
 
     }
 
-    public abstract void onBulletFlyTick();
+    public void onHit() {
 
-    public abstract void onHit();
+    }
 
     @Override
     public ItemStack getItemStack() {
@@ -64,8 +66,8 @@ public abstract class Gun extends Item {
 
         lore.add("");
 
-        lore.add("&6攻击力: &e&l" + damage);
-        lore.add("&6暴击率: &e&l" + Message.formatNumber(criticalRate) + "%");
+        if (damage != 0) lore.add("&6攻击力: &e&l" + damage);
+        if (criticalRate != 0) lore.add("&6暴击率: &e&l" + Message.formatNumber(criticalRate) + "%");
         lore.add("&6载弹量: &e&l" + magazineSize);
 
         lore.add("&6射程: &e&l" + range);
@@ -73,7 +75,7 @@ public abstract class Gun extends Item {
 
         lore.add("&6攻击速度: &e&l" + Message.formatNumber(20.0 / attackSpeed));
         lore.add("&6换弹速度: &e&l" + Message.formatNumber(20.0 / reloadSpeed));
-        lore.add("&6暴击倍率: &e&l" + criticalMultiply + "x");
+        if (criticalMultiply != 0) lore.add("&6暴击倍率: &e&l" + criticalMultiply + "x");
 
         return new ItemBuilder(itemStack).lore(lore).persistentDataContainer("BulletAmount", magazineSize).build();
     }

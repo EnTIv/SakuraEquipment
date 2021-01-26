@@ -1,5 +1,6 @@
 package com.entiv.sakuraequipment.gun;
 
+import com.entiv.sakuraequipment.bullet.Bullet;
 import com.entiv.sakuraequipment.utils.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -10,16 +11,16 @@ import java.util.List;
 import java.util.Random;
 
 // 不可变类, 构造方法为 private 防止继承
-public class randomGun extends Gun {
+public class RandomGun extends Gun {
 
-    private randomGun(Builder builder) {
+    private RandomGun(Builder builder) {
         super(builder);
     }
 
-    public static randomGun getInstance() {
+    public static RandomGun getInstance() {
 
         int damage = randomInt(1, 20);
-        double range = randomDouble(0, 10.0, 2);
+        double range = randomDouble(10, 30.0, 2);
 
         int attackSpeed = randomInt(1, 25);
         double bulletSpeed = randomDouble(0, 40, 1);
@@ -49,23 +50,7 @@ public class randomGun extends Gun {
 
     @Override
     public Bullet getBullet() {
-
         return new Bullet(damage, bulletSpeed, range, criticalRate, criticalMultiply);
-    }
-
-    @Override
-    public void onShoot() {
-
-    }
-
-    @Override
-    public void onBulletFlyTick() {
-
-    }
-
-    @Override
-    public void onHit() {
-
     }
 
     @Override
@@ -193,8 +178,8 @@ public class randomGun extends Gun {
         }
 
         @Override
-        public randomGun build() {
-            return new randomGun(this);
+        public RandomGun build() {
+            return new RandomGun(this);
         }
 
         @Override

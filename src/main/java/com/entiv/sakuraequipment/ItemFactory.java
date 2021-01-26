@@ -30,7 +30,9 @@ public class ItemFactory {
     public Gun.Builder<?> gunCreate(String name) {
         try {
             return (Gun.Builder<?>) factories
-                    .computeIfAbsent(name, k -> ItemFactory.load("gun", name))
+//                    .computeIfAbsent(name, k -> ItemFactory.load("gun", name))
+                    // 生存服特供
+                    .computeIfAbsent(name, k -> ItemFactory.load("gun", "RandomGun"))
                     .newInstance();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             throw new NullPointerException("找不到枪械" + name);

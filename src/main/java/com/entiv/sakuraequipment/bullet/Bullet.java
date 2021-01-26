@@ -1,15 +1,14 @@
-package com.entiv.sakuraequipment.gun;
+package com.entiv.sakuraequipment.bullet;
 
-import com.entiv.sakuraequipment.utils.ItemBuilder;
-import com.entiv.sakuraequipment.utils.Message;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Bullet {
 
     public final double speed;
     public final double damage;
-    public final double flyTime;
+    public final double range;
 
     public final double criticalRate;
     public final double criticalMultiply;
@@ -17,10 +16,13 @@ public class Bullet {
 
     public boolean isCritical = false;
 
-    public Bullet(double damage,double speed,double flyTime, double criticalRate, double criticalMultiply) {
+    final List<BulletTrack> bulletTracks = new ArrayList<>();
+
+    public Bullet(double damage, double speed, double range, double criticalRate, double criticalMultiply) {
+
         this.damage = damage;
         this.speed = speed;
-        this.flyTime = flyTime;
+        this.range = range;
 
         this.criticalRate = criticalRate;
         this.criticalMultiply = criticalMultiply;
@@ -35,4 +37,7 @@ public class Bullet {
         }
     }
 
+    public void addBulletTrack(BulletTrack bulletTrack) {
+        bulletTracks.add(bulletTrack);
+    }
 }
