@@ -1,6 +1,9 @@
 package com.entiv.sakuraequipment.gun;
 
 import com.entiv.sakuraequipment.bullet.Bullet;
+import com.entiv.sakuraequipment.bullet.CircularTrajectory;
+import com.entiv.sakuraequipment.bullet.StraightTrajectory;
+import com.entiv.sakuraequipment.bullet.TrackingTrajectory;
 import com.entiv.sakuraequipment.utils.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -50,7 +53,13 @@ public class RandomGun extends Gun {
 
     @Override
     public Bullet getBullet() {
-        return new Bullet(damage, bulletSpeed, range, criticalRate, criticalMultiply);
+        return new Bullet()
+                .damage(damage)
+                .speed(bulletSpeed)
+                .range(range)
+                .criticalRate(criticalRate)
+                .criticalMultiply(criticalMultiply)
+                .addBulletTrack(new StraightTrajectory());
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.entiv.sakuraequipment.gun;
 
 import com.entiv.sakuraequipment.Item;
 import com.entiv.sakuraequipment.bullet.Bullet;
+import com.entiv.sakuraequipment.bullet.StraightTrajectory;
+import com.entiv.sakuraequipment.bullet.TrackingTrajectory;
 import com.entiv.sakuraequipment.event.GunDamageEvent;
 import com.entiv.sakuraequipment.event.GunShootEvent;
 import com.entiv.sakuraequipment.utils.ItemBuilder;
@@ -48,7 +50,14 @@ public abstract class Gun extends Item {
     }
 
     public Bullet getBullet() {
-        return new Bullet(damage, bulletSpeed, range, criticalRate, criticalMultiply);
+        return new Bullet()
+                .damage(damage)
+                .speed(bulletSpeed)
+                .range(range)
+                .criticalRate(criticalRate)
+                .criticalMultiply(criticalMultiply)
+                .addBulletTrack(new StraightTrajectory())
+                .addBulletTrack(new TrackingTrajectory());
     }
 
     public void onBulletFlyTick() {
@@ -76,6 +85,8 @@ public abstract class Gun extends Item {
         lore.add("&6攻击速度: &e&l" + Message.formatNumber(20.0 / attackSpeed));
         lore.add("&6换弹速度: &e&l" + Message.formatNumber(20.0 / reloadSpeed));
         if (criticalMultiply != 0) lore.add("&6暴击倍率: &e&l" + criticalMultiply + "x");
+
+
 
         return new ItemBuilder(itemStack).lore(lore).persistentDataContainer("BulletAmount", magazineSize).build();
     }

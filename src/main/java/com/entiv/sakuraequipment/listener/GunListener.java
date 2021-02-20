@@ -6,6 +6,7 @@ import com.entiv.sakuraequipment.bullet.BulletRunnable;
 import com.entiv.sakuraequipment.gun.Gun;
 import com.entiv.sakuraequipment.utils.Message;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -33,6 +34,7 @@ public class GunListener implements Listener {
         BulletRunnable runnable = new BulletRunnable(player, gun.getBullet());
         runnable.runTaskTimer(Main.getInstance(), 0, 1);
         player.setCooldown(itemStack.getType(), gun.attackSpeed);
+        player.playSound(player.getLocation(), Sound.ENTITY_ARROW_SHOOT,10,0);
 
         if (bulletAmount <= 1) {
             reload(player, itemStack, gun);
